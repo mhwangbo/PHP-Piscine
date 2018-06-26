@@ -14,6 +14,29 @@ function changeImage()
 		image.src="resources/cluster.jpg";
 	}
 }
+var input_no = 0;
+function input(){
+	var input = document.getElementById("type").value;
+	input_no = input_no + 1;
+	if input_no = 
+function allowDrop(ev)
+{
+	ev.preventDefault();
+}
+function drag(ev)
+{
+	ev.dataTransfer.setData("text", ev.targt.id);
+}
+function drop(ev)
+{
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("text");
+	var image = document.getElementById("cluster");
+	if (image.src.match("cluster.jpg")){
+		image.src="resources/cluster_clean.jpg";
+	}
+	ev.target.appendChild(document.getElementById(data));
+}
 		</SCRIPT>
 		<META charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="doft.css">
@@ -41,13 +64,13 @@ function changeImage()
 				<img src="resources/chat-icon.png" id="chat" title="Speak" alt="Speak"/>
 			</div>
 			<div class="mid_block block">
-				<img id="cluster" src="resources/cluster.jpg"/>
+				<img id="cluster" src="resources/cluster.jpg" alt="cluster" usemap="#workmap"/>
 				<a href="http://www.ikea.com/" id="ikea" target="_blank"></a>
 				<a href="https://www.apple.com/" id="apple" target="_blank"></a>
 			</div>
 			<div class="right_block block">
-				<img src="resources/book.png" id="book"/>
-				<img src="resources/towel.png" id="towel"/>
+				<img src="resources/book.png" draggable="true" ondragstart="drag(event)" id="book"/>
+				<img src="resources/towel.png" draggable="true" ondragstart="drag(event)" id="towel"/>
 				<div id="brick_id">
 					<img src="resources/brick.jpg" class="brick"/>
 					<img src="resources/brick.jpg" class="brick"/>

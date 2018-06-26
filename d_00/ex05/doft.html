@@ -1,0 +1,108 @@
+<HTML style="background-color:#505050;">
+	<HEAD>
+		<script>
+var input_no = 0;
+var where_i_am = 0;
+var clean_it = 0;
+function changeImage()
+{
+	var image = document.getElementById("cluster");
+	if (image.src.match("cluster")){
+		image.src="resources/piscine-zone.jpeg";
+		document.getElementById("input_i").innerHTML = "<p><big>- this is the piscine zone, you are not allowed here</p></big>";
+		where_i_am = 1;
+	}
+	else if (image.src.match("piscine")){
+		image.src="resources/meeting.jpg";
+		document.getElementById("input_i").innerHTML = "<p><b>- sorry we are having a meeting here</p></b>";
+		where_i_am = 2;
+	}
+	else{
+		image.src="resources/cluster.jpg";
+		where_i_am = 0;
+		input_no = input_no - 1;
+		input();
+	}
+}
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+	var image = document.getElementById("cluster");
+	if (image.src.match("cluster") && clean_it == 1)
+		image.src="resources/cluster_clean.jpg";
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+function input(){
+	input_no = input_no + 1;
+	if (where_i_am == 0)
+	{
+		if (input_no == 1)
+			document.getElementById("input_i").innerHTML = "<p><i>- Interesting. What's your Name?</p></i>";
+		else if (input_no == 2)
+			document.getElementById("input_i").innerHTML = "<p><i>- Actually, I don't think I really care...</i></p>";
+		else if (input_no == 3){
+			document.getElementById("input_i").innerHTML = "<p><i>- Stop bothering me. If you are that bored clean computers</i></p>";
+			clean_it = 1;
+		}
+		else if (input_no == 0)
+			document.getElementById("input_i").innerHTML = "<p><i>- Hello, are you new here?</i></p>";
+	}
+}
+		</script>
+		<META charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="doft.css">
+		<TITLE>Day of the 42</TITLE>
+	</HEAD>
+	<BODY>
+		<div class="top_block block">
+			<img src="resources/day_of_the_42.png" title="day_42" alt="day_42" id="day42"/>
+			<div class="top_right">
+				<a href="http://www.disney.com/" target="_blank">
+					<img src="resources/reload.png" title="Start from the beginning" alt="reload" id="reload"/>
+				</a>
+				<a href="https://www.relaischateaux.com/" target="_blank">
+					<img src="resources/close.gif" title="Disconnect" alt="close" id="close"/>
+				</a>
+			</div>
+			<img src="resources/loupe.png" tile="loupe" alt="loupe" id="loupe"/>
+		</div>
+		<div class="middle">
+			<div class="left_block block">
+				<img src="resources/arrow.png" onclick="javascript:changeImage();" id="arrow" title= "Advance" alt="Advance"/>
+				<img src="resources/main.png" id="main" title="Take" alt="Take"/>
+				<img src="resources/oeil.png" id="oeil" title="Look" alt="Look"/>
+				<img src="resources/outil.png" id="outil" title="Use" alt="Use"/>
+				<img src="resources/chat-icon.png" id="chat" title="Speak" alt="Speak"/>
+			</div>
+			<div class="mid_block block" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img src="resources/cluster.jpg" title="cluster" alt="cluster" id="cluster"/>
+				<a href="http://www.ikea.com/" id="ikea" target="_blank"></a>
+				<a href="https://www.apple.com/" id="apple" target="_blank"></a>
+			</div>
+			<div class="right_block block">
+				<img src="resources/book.png" title="book" alt="book" id="book"/>
+				<img src="resources/towel.png" draggable="true" ondragestart="drag(event)" title="towel" alt="towel" id="towel"/>
+				<div id="brick_id">
+					<img src="resources/brick.jpg" title="brick" alt="brick" class="brick"/>
+					<img src="resources/brick.jpg" title="brick" alt="brick" class="brick"/>
+				</div>
+			</div>
+			<div class="green_block">
+				<p>You <font face="Georgia" size="+3">enter</font> a large room filled with <span id="ordinateurs">computers</span>...</p>
+				<div id="input_i"><p><i>- Hello, are you new here?</i></p></div>
+				<form>
+					<input type="text" id="type">
+					<input type="button" value="Repondre" onclick="input()">
+				</form>
+			</div>
+		</div>
+	</BODY>
+</HTML>
