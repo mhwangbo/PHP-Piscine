@@ -1,5 +1,20 @@
 <HTML style="background-color:#505050;">
 	<HEAD>
+		<SCRIPT>
+function changeImage()
+{
+	var image = document.getElementById("cluster");
+	if (image.src.match("cluster")){
+		image.src="resources/piscine-zone.jpeg";
+	}
+	else if (image.src.match("piscine")){
+		image.src="resources/meeting.jpg";
+	}
+	else{
+		image.src="resources/cluster.jpg";
+	}
+}
+		</SCRIPT>
 		<META charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="doft.css">
 		<TITLE>Day of the 42</TITLE>
@@ -19,14 +34,14 @@
 		</div>
 		<div class="middle">
 			<div class="left_block block">
-				<img src="resources/arrow.png" id="arrow" title= "Advance" alt="Advance"/>
+				<img id="arrow" onclick="javascript:changeImage();" src="resources/arrow.png" title= "Advance" alt="Advance"/>
 				<img src="resources/main.png" id="main" title="Take" alt="Take"/>
 				<img src="resources/oeil.png" id="oeil" title="Look" alt="Look"/>
 				<img src="resources/outil.png" id="outil" title="Use" alt="Use"/>
 				<img src="resources/chat-icon.png" id="chat" title="Speak" alt="Speak"/>
 			</div>
 			<div class="mid_block block">
-				<img src="resources/cluster.jpg" id="cluster"/>
+				<img id="cluster" src="resources/cluster.jpg"/>
 				<a href="http://www.ikea.com/" id="ikea" target="_blank"></a>
 				<a href="https://www.apple.com/" id="apple" target="_blank"></a>
 			</div>
@@ -39,13 +54,14 @@
 				</div>
 			</div>
 			<div class="green_block">
-				<p>Vous <font face="Georgia" size="+3">entrez</font> alors dans une grande piece remplie d'<span id="ordinateurs">ordinateurs</span>...</p>
-				<p><i>- Bonjour, vous êtes nouveau ici ?</i></p>
+				<p>You <font face="Georgia" size="+3">enter</font> a large room filled with <span id="ordinateurs">computers</span>...</p>
+				<p><i>- Hello, are you new here?</i></p>
 				<form>
 					<input type="text" id="type">
-					<input type="submit" value="Repondre" id="button">
+					<input type="submit" value="Respond" id="button">
 				</form>
 			</div>
 		</div>
 	</BODY>
 </HTML>
+
