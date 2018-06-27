@@ -29,9 +29,7 @@ function ft_sort($a)
 	$b = ft_sort_support($a, 0);
 	$result = array_combine($a, $b);
 	asort($result);
-	print_r($a);
-	print_r($b);
-	print_r($result);
+	return ($result);
 }
 
 $len = count($argv);
@@ -50,8 +48,8 @@ if ($len > 1)
 		}
 		$i++;
 	}
-	ft_sort($array_1);
-	for ($i = 0; $i < count($array_1); $i++)
-		echo ($array_1[$i]."\n");
+	$result = ft_sort($array_1);
+	foreach($result as $key => $value)
+		echo "$key\n";
 }
 ?>
