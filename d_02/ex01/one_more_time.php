@@ -1,9 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+$dow = 0;
+
 function error_manage($str, $mois)
 {
-	$semaine = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+	$semaine = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
 	$space = 0;
 	for ($i = 0; $i < strlen($str); $i++)
 	{
@@ -11,14 +13,16 @@ function error_manage($str, $mois)
 			$space++;
 	}
 	$str = explode(" ", $str);
+	global $dow;
+	$dow = array_search($str[0], $semaine);
 	if (($space != 4)
 		|| (count($str) != 5)
 		|| (!is_numeric($str[1]))
 		|| (strlen($str[1]) != 1 && strlen($str[1]) != 2)
 		|| (!is_numeric($str[3]))
 		|| (strlen($str[3]) != 4)
-		|| (array_search(strtolower($str[2]), $mois) == FALSE)
-		|| (array_search($str[0], $semaine) == FALSE))
+		|| (in_array(strtolower($str[2]), $mois) == FALSE)
+		|| (in_array($str[0], $semaine) == FALSE))
 	{
 		echo "Wrong Format\n";
 		exit (0);
@@ -49,6 +53,12 @@ if ($argc == 2)
 	$argv[1] = strtolower($argv[1]);
 	$argv[1] = preg_replace("/^(\w+\s)/", "", $argv[1]);
 	$time = str_replace(array_keys($month), array_values($month), $argv[1]);
+	$day = date("w",strtotime($time))."\n";
+	if ($day != $dow)
+	{
+		echo "Wrong Format\n";
+		exit (0);
+	}
 	$time_ref = strtotime('1970-01-01 00:00:00');
 	$time_cal = strtotime($time);
 	$diff = $time_cal - $time_ref;
