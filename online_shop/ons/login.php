@@ -14,13 +14,6 @@ if ($name && $pass)
 
 	if ($num > 0)
 	{
-		$sql = "SELECT * FROM session WHERE name = '{$name}'";
-		$resource = mysqli_query($conn, $sql);
-		$num = mysqli_fetch_assoc($resource);
-		$sess_id = session_id();
-		$sql = "INSERT INTO session VALUE('$name', '$sess_id')";
-		$ret = mysqli_query($conn, $sql);
-
 		$_SESSION["logged_on_user"] = $name;
 
 		echo "<script> alert('Login Sucess!');</script>";

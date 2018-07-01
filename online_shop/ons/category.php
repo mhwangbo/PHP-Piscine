@@ -10,7 +10,7 @@ if ($_GET['cat'])
 }
 
 if ($cat && $genre)
-	$s = "SELECT * FROM pduct WHERE cat={$cat} and {$genre}";
+	$s = "SELECT * FROM pduct WHERE `cat` = {$cat} and `genre` = {$genre}";
 elseif ($cat)
 	$s = "SELECT *  FROM `pduct` WHERE `cat` = {$cat}";
 else
@@ -18,7 +18,7 @@ else
 
 $resource = mysqli_query($conn, $s);
 ?>
-<table style="width:70%";height:"50px";border:"5px solid black">
+<table class="table_list">
 	<tr>
 		<td align="center" valign="middle" style="font-size:15px; font-weight:bold;">Product list</td>
 	</tr>
@@ -28,8 +28,9 @@ $resource = mysqli_query($conn, $s);
    <tr>
        <td align="center" valign="middle" width="5%" style="height:30px;background-color:grey;">no</td>
        <td align="center" valign="middle" width="10%" style="height:30px;background-color:grey;">Title</td>
-       <td align="center" valign="middle" width="60%" style="height:30px;background-color:grey;">Product Name</td>
-       <td align="center" valign="middle" width="25%" style="height:30px;background-color:grey;">Price</td>
+       <td align="center" valign="middle" width="50%" style="height:30px;background-color:grey;">Product Name</td>
+       <td align="center" valign="middle" width="23%" style="height:30px;background-color:grey;">Price</td>
+       <td align="center" valign="middle" width="10%" style="height:30px;background-color:grey;"></td>
    </tr>
 <?php
 $i = 0;
@@ -39,22 +40,19 @@ $i++;
 ?>
 <tr>
 <td align = "center" valign="middle" style="height:30px;"><?php echo "$i"; ?></td>
-<td align = "center" valign="middle" style="height:30px;"><img src="<?php echo ($data['image']);?>"/></td>
+<td align = "center" valign="middle" style="height:30px;"><img src="<?php echo ($data['image']);?>" width ="100%"/></td>
 <td align = "left" valign="middle" style="height:30px;"><?php echo "$data[pdname]"; ?></td>
 <td align = "center" valign="middle" style="height:30px;"><?php echo "$"."$data[price]"; ?></td>
+<td align = "center" valign="middle" style="height:30px;">
+<a href="cart_save.php?pdname='<?php echo "$data[pdname]";?>">Add to Cart</a>
+</td>
 </tr>
 <?php
 }
 ?>
-<?
-if($i == 0){
-?>
    <tr>
-       <td align="center" valign="middle" colspan="4" style="height:50px;background-color:#FFFFFF;">No Product Available</td>
+       <td align="center" valign="middle" colspan="5" style="height:50px;background-color:#FFFFFF;">End of Product</td>
    </tr>
-<?
-}
-?>
 </table>
 	</body>
 </html>

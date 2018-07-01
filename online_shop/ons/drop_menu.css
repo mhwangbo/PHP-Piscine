@@ -77,6 +77,13 @@
 	float: top;
 }
 
+.table_list {
+	display:block;
+	width: 70%;
+	height: auto;
+	border: 5px solid black;
+}
+
 .menu_b{
 border:none;
 border:0px;

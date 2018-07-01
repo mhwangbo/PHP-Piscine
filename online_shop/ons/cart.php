@@ -1,70 +1,69 @@
-<?php
+<?
 require_once('conn.php');
+include ("./head.php");
 
-session_start();
-
-if(isset($_POST["add_to_cart"]))
-{
-	if (isset($_SESSION["shopping_cart"]))
-	{
-		$item_arr = array_column($_SESSION["shopping_cart"], "pdname");
-		if(!in_array($_GET["name"], $item_arr))
-		{
-			$count = count($_SESSION["shopping_cart"]);
-			$item_arr = array(
-				'pdname' => $_POST["hidden_name"],
-				'price' => $_POST["hidden_price"],
-				'quantity'=> $_POST["quantity"]
-			);
-			$_SESSION["shopping_cart"][$count] = $item_arr;
-		}
-		else
-		{
-			echo '<script>alert("Same item is already in the cart")</script>';
-			echo '<script>window.location="index.php"</script>';
-		}
-	}
-	else
-	{
-		$item_arr = array(
-			'pdname' => $_POST["hidden_name"],
-			'price' => $_POST["hidden_price"],
-			'quantity'=> $_POST["quantity"]
-		);
-		$_SESSION["shopping_cart"][0] = $item_arr;
-	}
+if(!$_SESSION[logged_on_user]){
+    alert("Please login.", "./login.php");
 }
 
-if(isset($_GET["action"]))
-{
+// 3. 장바구니 목록 뽑기
+$sql = "select c.*, i.i_name, i.i_price from m__cart as c left join m__item as i on c.c_i_idx = i.i_idx where c.c_m_idx = '".$_SESSION[user_idx]."' and c.c_o_idx = '0'";
+$result = mysql_query($sql, $connect);
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Shopping Cart</title>
-	</head>
-	<body>
-	<br />
-	<h3>Shopping Cart</h3>
-	<br>
-<?php
-	$sql = "SELECT * FROM pduct ORDER BY name ASC";
-	$resource = mysqli_query($conn, $sql);
-	if (mysqli_fetch_assoc($resource) > 0)
-	{
-		while($row = mysqli_fetch_assoc($resource))
-		{
+<br/>
+<table style="width:1000px;height:50px;border:5px #CCCCCC solid;">
+    <tr>
+        <td align="center" valign="middle" style="font-zise:15px;font-weight:bold;">장바구니</td>
+    </tr>
+</table>
+<br/>
+<table style="width:1000px;height:50px;border:0px;">
+<table cellspacing="1" style="width:1000px;height:50px;border:0px;background-color:#999999;">
+    <tr>
+        <td align="center" valign="middle" width="40%" style="height:30px;background-color:#CCCCCC;">상품명</td>
+        <td align="center" valign="middle" width="20%" style="height:30px;background-color:#CCCCCC;">상품단가</td>
+        <td align="center" valign="middle" width="20%" style="height:30px;background-color:#CCCCCC;">상품수량</td>
+        <td align="center" valign="middle" width="20%" style="height:30px;background-color:#CCCCCC;">소계</td>
+    </tr>
+<?
+// 4.데이터 갯수화 총합 체크를 위한 변수 설정
+$i = 0;
+$sum = 0;
+
+
+// 5.데이터가 있을 동안 반복해서 값을 한 줄씩 읽기
+while($data = mysql_fetch_array($result)){
 ?>
-	<form method="POST" action='cart.php?action=add&id=<?php echo $row["name"]; ?>'>
-		<h4><?php echo $row["name"]; ?></h4>
-		<h4><?php echo $row["price"]; ?></h4>
-	
-		<input type="text" name="quantity" class="form-control" value="1" />
-		<input type="hidden" name="hidden_name" value="<?php echo $row["pdname"] ?>" />
-		<input type="hidden" name="hidden_price" value="<?php echo $row["price"] ?>" />
-		<input type="submit" name="add_to_cart" style="margin-top:5px;" value="add"/>
-	</form>
-<?php
-		}
-	}
+    <tr>
+        <td align="center" valign="middle" style="height:30px;background-color:#FFFFFF;"><?=$data[i_name]?></td>
+        <td align="center" valign="middle" style="height:30px;background-color:#FFFFFF;"><?=number_format($data[i_price])?>원</td>
+        <td align="center" valign="middle" style="height:30px;background-color:#FFFFFF;"><?=number_format($data[c_cnt])?>개</td>
+        <td align="center" valign="middle" style="height:30px;background-color:#FFFFFF;"><?=number_format($data[c_price])?>원</td>
+    </tr>
+<?
+
+    // 6.데이터 갯수 체크를 위한 변수를 1 증가시키고 총합을 더하기
+    $i++;
+    $sum += $data[c_price];
+}
+
+// 7.데이터가 하나도 없으면 
+if($i == 0){
 ?>
+    <tr>
+        <td align="center" valign="middle" colspan="4" style="height:50px;background-color:#FFFFFF;">상품이 하나도 없습니다.</td>
+    </tr>
+<?
+}
+?>
+    <tr>
+        <td align="center" valign="middle" colspan="4" style="height:50px;background-color:#FFFFFF;">총 합 : <?=number_format($sum)?>원</td>
+    </tr>
+</table>
+<br/>
+<table style="width:1000px;height:50px;">
+    <tr>
+        <td align="center" valign="middle"><input type="button" value=" 구매하기 " onClick="location.href='./order.php';"></td>
+    </tr>
+</table>
+
