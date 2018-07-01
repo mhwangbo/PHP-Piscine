@@ -1,0 +1,169 @@
+.top_block{
+	width = 74%;
+	height: auto;
+	margin: auto;
+	margin-top: 1%;
+	padding: 1%;
+	position: relative;
+	z-index: 1;
+}
+
+.mid_block{
+	width: 74%;
+	height: auto;
+	padding: 1%;
+	float: left;
+	margin-left: 3%;
+	z-index: 1;
+}
+
+.block {
+	background-color: white;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 10px;
+}
+
+#cart {
+	float: right;
+	display:block;
+	margin:auto;
+	width: 3%;
+	height: auto;
+}
+
+.middle {
+	display: block;
+	width: 100%;
+	height: 50%;
+	margin-left: 0%;
+	margin-top:2%;
+}
+
+.middle_create {
+	text-align: center;
+	display: block;
+	width: 20%;
+	height: auto;
+	float: left;
+	padding: 5%;
+	margin-left: 40%;
+	margin-top:10%;
+}
+
+.left_block {
+	width: 70%;
+	height: auto;
+	float: left;
+	margin-left:3%;
+	padding: 1%;
+	padding-bottom: 2%;
+}
+
+.right_block {
+	text-align: center;
+	width: 20%;
+	height: auto;
+	float: right;
+	margin-right:3%;
+	padding: 1%;
+	padding-top: 13%;
+	padding-bottom: 13%;
+}
+
+.right_top_block {
+	display:inline-block;
+	width: 100%;
+	height: auto;
+	float: top;
+}
+
+.menu_b{
+border:none;
+border:0px;
+margin:0px;
+padding:0px;
+font: Verdana;
+font-size:14px;
+font-weight:bold;
+}
+
+.menu_b ul{
+background: white;
+height:50px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.menu_b li{
+float:left;
+padding:0px;
+}
+
+.menu_b li a{
+background: white;
+color:rgb(55, 58, 55);
+display:block;
+font-weight:normal;
+line-height:50px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+}
+
+.menu_b li a:hover, .menu_b ul li:hover a{
+background: grey;
+color:#FFFFFF;
+text-decoration:none;
+}
+
+.menu_b li ul{
+background: rgb(24, 112, 11);
+display:none;
+height:auto;
+padding:0px;
+margin:0px;
+border:0px;
+position:absolute;
+width:200px;
+z-index:200;
+}
+
+.menu_b li:hover ul{
+display:block;
+}
+
+.menu_b li li {
+background: grey;
+display:block;
+float:none;
+margin:0px;
+padding:0px;
+width:200px;
+}
+
+.menu_b li:hover li a{
+background:none;
+}
+
+.menu_b li ul a{
+display:block;
+height:50px;
+font-size:12px;
+font-style:normal;
+margin:0px;
+padding:0px 10px 0px 15px;
+text-align:left;
+}
+
+.menu_b li ul a:hover, .menu_b li ul li:hover a{
+background: rgb(12, 56, 5);
+border:0px;
+color:#ffffff;
+text-decoration:none;
+}
+
+.menu_b p{
+clear:left;
+}
