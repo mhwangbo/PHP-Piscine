@@ -4,15 +4,11 @@ include "header.php";
 
 if(!$_SESSION["logged_on_user"])
 {
-	echo 'Please login';
-?>
-<br />
-<br />
-<a href='Index.php'>Go to main page</a>
-<br />
-<?php
+	echo "<script> alert('Please login');
+		window.location.href='index.php';</script>";
 }
-
+else
+{
 $pdname = $_GET["pdname"];
 if(!$pdname)
 {
@@ -35,8 +31,6 @@ $sql = "INSERT INTO `cart`(`name`, `price`, `quantity`, `pdname`) VALUES ('{$use
 
 mysqli_query($conn, $sql);
 
-
-echo 'Added to cart';
+	echo "<script> alert('Added to Cart'); window.history.back();</script>;";
+}
 ?>
-<a href='index.php'>Go to main page</a>
-<a href='cart.php'>Go to Cart</a>

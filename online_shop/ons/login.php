@@ -14,6 +14,7 @@ if ($name && $pass)
 
 	if ($num > 0)
 	{
+		$_SESSION["idx"] = $num["idx"];
 		$_SESSION["logged_on_user"] = $name;
 
 		echo "<script> alert('Login Sucess!');</script>";
