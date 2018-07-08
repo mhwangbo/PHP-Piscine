@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>calculator</title>
+	</head>
+	<body>
+		<script>
+			function calc()
+			{
+				var l_side = document.getElementById("left").value;
+				var oper = document.getElementById("operator").value;
+				var r_side = document.getElementById("right").value;
+				if (l_side != '' && r_side != '')
+				{
+					var result = 0;
+					l_side = Number(l_side);
+					r_side = Number(r_side);
+
+					if (l_side < 0 || r_side < 0)
+						alert ("Error :(");
+					else if ((oper == "%" || oper == '/') && r_side == 0)
+					{
+						console.log ("It's over 9000!");
+						alert ("It's over 9000!");
+					}
+					else
+					{
+						if (oper == "+")
+							result = l_side + r_side;
+						else if (oper == "-")
+							result = l_side - r_side;
+						else if (oper == "*")
+							result = l_side * r_side;
+						else if (oper == "/")
+							result = l_side / r_side;
+						else if (oper == "%")
+							result = l_side % r_side;
+						alert (result);
+						console.log (result);
+					}
+				}
+			}
+			var timeI = setInterval(use_me, 30000);
+			function use_me()
+			{
+				alert ("Please, use me...");
+			}
+		</script>
+		<form>
+			<input type="text" name="left" id="left">
+			<select id = "operator">
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+				<option value="%">%</option>
+			</select>
+			<input type="text" name="right" id="right">
+			<input type="button" onclick="calc()" value="Try me!">
+		</form>
+	</body>
+</html>

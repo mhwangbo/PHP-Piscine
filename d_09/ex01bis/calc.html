@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Calculator</title>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script>
+$(document).ready(function(){
+	var result;
+	$("#try_me").click(function() {
+		l_side = Number($("#left").val());
+		r_side = Number($("#right").val());
+		if (($("#operator").val() == "/" || $("#operator").val() == "%") && r_side == 0)
+		{
+			alert ("It's over 9000!");
+			console.log("It's over 9000!");
+		}
+		else if (l_side < 0 || r_side < 0)
+			alert ("Error :(");
+		else {
+			switch($("#operator").val()){
+				case "+": 
+					result = l_side + r_side; break; 
+				case "-": 
+					result = l_side - r_side; break;
+				case "*":
+					result = l_side * r_side; break;
+				case "/":
+					result = l_side / r_side; break;
+				case "%": 
+					result = l_side % r_side; break;
+			}
+			alert(result);
+			console.log(result);
+		}
+	});
+	var timeI = setInterval(use_me, 30000);
+	function use_me()
+	{
+		alert ("Please, use me...");
+	}
+});
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type="number" name="left" id="left">
+			<select id = "operator">
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+				<option value="%">%</option>
+			</select>
+			<input type="number" name="right" id="right">
+			<input type="button" id="try_me" value="Try me!">
+		</form>
+	</body>
+</html>
